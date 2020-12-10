@@ -28,14 +28,17 @@ Use the help menu to explore what the series `gold`, `woolyrnq` and `gas` repres
 ```{r, echo=TRUE, cache=TRUE, eval=FALSE}
 help(gold)
 # to do
-
+help(woolyrnq)
+help(gas)
 ```
 
 Use `autoplot` to plot each of these in separate plots.
 
 ```{r, echo=TRUE, cache=TRUE}
 # to do
-
+autoplot(gold)
+autoplot(woolyrnq)
+autoplot(gas)
 ```
 
 **What is the frequency of each commodity series?**
@@ -43,7 +46,9 @@ Hint: apply the `frequency()` function.
 
 ```{r, echo=TRUE, cache=TRUE}
 # to do
-
+frequency(gold)
+frequency(woolyrnq)
+frequency(gas)
 ```
 
 Use `which.max()` to spot the outlier in the `gold` series. 
@@ -51,7 +56,7 @@ Use `which.max()` to spot the outlier in the `gold` series.
 
 ```{r, echo=TRUE, cache=TRUE}
 # to do
-
+which.max(gold)
 ```
 
 # Exercise 2 
@@ -75,14 +80,14 @@ Construct time series plots of each of the three series and use 'facets = TRUE' 
 
 ```{r, echo=TRUE, cache=TRUE}
 # to do
-
+autoplot(mytimeseries, facets = TRUE)
 ```
 
 Check what happens when you don't include `facets=TRUE`.
 
 ```{r, echo=TRUE, cache=TRUE, dependson="exmyts"}
 # to do
-
+autoplot(mytimeseries)
 ```
 
 # Exercise 3
@@ -93,6 +98,7 @@ You can read the data into R with the following script:
 
 ```{r, echo=TRUE, cache=TRUE}
 retaildata <- readxl::read_excel("data/retail.xlsx", skip = 1)
+View(retaildata)
 ```
 
 The second argument (`skip=1`) is required because the Excel sheet has two header rows.
@@ -100,19 +106,27 @@ The second argument (`skip=1`) is required because the Excel sheet has two heade
 Select one of the time series as follows (but replace the column name with your own chosen column):
 
 ```{r, echo=TRUE, cache=TRUE}
-myts <- ts(retaildata[, "A3349873A"], frequency = 12, start = c(1982, 4))
+myts <- ts(retaildata[, "A3349398A"], frequency = 12, start = c(1982, 4))
 ```
 
 Explore your chosen retail time series using the following functions: `autoplot`, `ggseasonplot`, `ggsubseriesplot`, `gglagplot`, `ggAcf`
 
 ```{r, echo=TRUE, cache=TRUE}
 # to do
+autoplot(myts)
+ggseasonplot(myts)
+ggsubseriesplot(myts)
+gglagplot(myts)
+ggAcf(myts)
 
 ```
 
 **Can you spot any seasonality, cyclicity and trend? What do you learn about the series?**
 
 Your answer:
+-clear upward trend
+-no cyclicity
+-there is seasonality (e.g. highest in december, lowest in february)
 
 
 # Exercise 4
@@ -123,7 +137,20 @@ Create time plots of the following time series: goog, writing, fancy, a10, h02.
 
 ```{r, echo=TRUE, message=FALSE, warning=FALSE}
 # to do
+help(goog)
+autoplot(goog)
 
+help(writing)
+autoplot(writing)
+
+help(fancy)
+autoplot(fancy)
+         
+help(a10)
+autoplot(a10)
+
+help(h02)
+autoplot(h02)
 ```
 
 Use the `ggseasonplot` and `ggsubseriesplot` functions to explore the seasonal patterns in the following time series:  `writing`, `fancy`, `a10`, `h02`.
@@ -135,38 +162,46 @@ Use the `ggseasonplot` and `ggsubseriesplot` functions to explore the seasonal p
 ```{r, echo=TRUE}
 # writing
 # to do
-
+ggseasonplot(writing)
+ggsubseriesplot(writing)
 ```
 
 Your answer:
+-lowest in august
 
 
 ```{r, echo=TRUE}
 # fancy
 # to do
-
+ggseasonplot(fancy)
+ggsubseriesplot(fancy)
 ```
 
 Your answer:#
-
+-highest in december (more extreme in 1992/1993 compared to other years)
+-mostly increasing throughout the year
 
 ```{r, echo=TRUE}
 # a10
 # to do
-
+ggseasonplot(a10)
+ggsubseriesplot(a10)
 ```
 
 Your answer:
-
+-highest in january
+-lowest in feburary (exception in 2008, shifted by 1 month)
 
 ```{r, echo=TRUE}
 # h02
 # to do
-
+ggseasonplot(h02)
+ggsubseriesplot(h02)
 ```
 
 Your answer:
-
+-lowest in february  (exception in 2008, shifted by 2 month)
+-highest in jan/dec
 
 # Exercise 5
 Use the following graphics functions: `autoplot`, `ggseasonplot`, `ggsubseriesplot`, `gglagplot`, `ggAcf` and explore features from the following time series: `hsales`, `usdeaths`, `bricksq`, `sunspotarea`, `gasoline`.
@@ -191,34 +226,58 @@ ggAcf(hsales)
 
 ```{r, echo=TRUE, cache=TRUE}
 # to do
-
+autoplot(usdeaths)
+ggseasonplot(usdeaths)
+ggsubseriesplot(usdeaths)
+gglagplot(usdeaths)
+ggAcf(usdeaths)
 ```
 
 Your answer:
 
+  + Seasonality evident in all plots
+  + No Cyclicity
+  + No trend
 
 ```{r, echo=TRUE, cache=TRUE}
 # to do
-
+autoplot(bricksq)
+ggseasonplot(bricksq)
+ggsubseriesplot(bricksq)
+gglagplot(bricksq)
+ggAcf(bricksq)
 ```
 
 Your answer:
 
+  + Seasonality evident in all plots
+  + Cyclicity (about 10 years) starting 1975
+  + upwards trend until 1980
 
 ```{r, echo=TRUE, cache=TRUE}
 # to do
-
+autoplot(sunspotarea)
+gglagplot(sunspotarea)
+ggAcf(sunspotarea)
 ```
 
 Your answer:
-
+-data not seasonal
+-no trend
+-cyclicity seen in first plot
 
 ```{r, echo=TRUE, cache=TRUE}
 # to do
-
+autoplot(gasoline)
+ggseasonplot(gasoline)
+gglagplot(gasoline)
+ggAcf(gasoline)
 ```
 
 Your answer:
+  + Seasonality evident
+  + no yyclicity
+  + upwards trend until 2007
 
 
 # Exercise 6
@@ -239,11 +298,13 @@ ggAcf(y)
 
 ```{r, echo=TRUE, cache=TRUE}
 # todo
-
+mypigs <- window(pigs, start=1990)
+autoplot(mypigs)
+ggAcf(mypigs)
 ```
 
 Your answer:
-
+first 3 lags show statistically relevant data, remaining is similar to white noise
 
 # Exercise 7
 
@@ -251,8 +312,10 @@ Your answer:
 
 ```{r}
 # todo
-
+ddj <- diff(dj)
+autoplot(ddj)
+ggAcf(ddj)
 ```
 
 Your answer:
-
+yes
